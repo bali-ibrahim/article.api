@@ -33,22 +33,22 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAsync(Article model)
         {
-            var rows = await _service.AddAsync(model);
-            return Ok(rows);
+            var isSuccessful = await _service.AddAsync(model);
+            return Ok(isSuccessful);
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateAsync(Article model)
         {
-            var rows = await _service.UpdateAsync(model);
-            return Ok(rows);
+            var isSuccessful = await _service.UpdateAsync(model);
+            return Ok(isSuccessful);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            var rows = await _service.DeleteAsync(id);
-            return Ok(rows);
+            var isSuccessful = await _service.DeleteAsync(id);
+            return Ok(isSuccessful);
         }
     }
 }
