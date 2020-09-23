@@ -17,7 +17,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> GetAsync(int? id)
         {
             var rows = await _service.GetAsync(id);
             return Ok(rows);
