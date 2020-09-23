@@ -1,7 +1,14 @@
-﻿namespace Model
+﻿using System;
+
+namespace Model
 {
     public interface IArticle
     {
         public int? Id { get; set; }
+        public string Title { get; set; }
+        public string AuthorFullName { get; set; }
+        public string Body { get; set; }
+        public DateTime? CreatedTimestamp { get; set; }
+        public DateTime? ModifiedTimestamp { get; set; }
     }
 }

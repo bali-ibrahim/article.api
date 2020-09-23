@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Model;
 using Repository;
@@ -25,9 +26,16 @@ namespace Service
         {
             var rows = await _repository.ReadAsync();
 
-            //TODO: satisfy all non null fields with like?
 
-            return rows;
+            var filteredRows = rows.Where(r => true
+                                               //TODO: make it dry
+                                               && r.Id.ToString().Contains(model.Id.ToString())
+                                               && r.Title.Contains(model.Title)
+                                               && r.AuthorFullName.Contains(model.AuthorFullName)
+                                               && r.Body.Contains(model.Body)
+            );
+
+            return filteredRows;
         }
 
         public async Task<int> AddAsync(IArticle model)
