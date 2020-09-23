@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Service;
 
 namespace API
 {
@@ -22,9 +23,21 @@ namespace API
 
         public IConfiguration Configuration { get; }
 
+        private void ConfigureIoC(IServiceCollection services)
+        {
+            services.AddTransient<IArticleService, ArticleService>();
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
+
+            services.AddOptions();
+
+            services.AddSingleton(Configuration);
+
+            ConfigureIoC(services);
             services.AddControllers();
         }
 
@@ -42,10 +55,7 @@ namespace API
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }
