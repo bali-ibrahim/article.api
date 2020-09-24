@@ -24,9 +24,9 @@ namespace API.Controllers
         }
 
         [HttpPost("search")]
-        public async Task<IActionResult> SearchAsync(Article model)
+        public async Task<IActionResult> SearchAsync(string pattern)
         {
-            var rows = await _service.SearchAsync(model);
+            var rows = await _service.SearchAsync(pattern);
             return Ok(rows);
         }
 

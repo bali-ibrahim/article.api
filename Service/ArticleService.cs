@@ -22,7 +22,16 @@ namespace Service
             return rows;
         }
 
-        public async Task<IEnumerable<IArticle>> SearchAsync(IArticle model)
+        public async Task<IEnumerable<IArticle>> SearchAsync(string pattern)
+        {
+            var rows = await _repository.ReadAsync();
+
+            var filteredRows = rows.Where(r => r.Contains(pattern));
+
+            return filteredRows;
+        }
+
+        public async Task<IEnumerable<IArticle>> DetailedSearchAsync(IArticle model)
         {
             var rows = await _repository.ReadAsync();
 

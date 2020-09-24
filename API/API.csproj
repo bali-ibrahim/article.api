@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Maria\Maria.csproj" />
     <ProjectReference Include="..\Service\Service.csproj" />
   </ItemGroup>
 
