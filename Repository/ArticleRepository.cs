@@ -3,10 +3,11 @@ using System.Threading.Tasks;
 using Dapper.Contrib.Extensions;
 using Database;
 using Model;
+using Model.Interface;
 
 namespace Repository
 {
-    public class ArticleRepository : IArticleRepository
+    public class ArticleRepository : IRepository<IArticle>
     {
         private readonly IDatabase _database;
 
@@ -15,11 +16,11 @@ namespace Repository
             _database = database;
         }
 
-
         public async Task<IArticle> CreateAsync(IArticle model)
         {
             using var connection = _database.Connection;
             connection.Open();
+            // TODO: is it ok to keep opening and closing
             var id = await connection.InsertAsync(model);
             connection.Close();
             model.Id = id;

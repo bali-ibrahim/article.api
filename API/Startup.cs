@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Model.Interface;
 using Repository;
 using Service;
 
@@ -21,7 +22,7 @@ namespace API
         private void ConfigureIoC(IServiceCollection services)
         {
             services.AddTransient<IDatabase, Maria.Maria>();
-            services.AddTransient<IArticleRepository, ArticleRepository>();
+            services.AddTransient<IRepository<IArticle>, ArticleRepository>();
             services.AddTransient<IArticleService, ArticleService>();
         }
 

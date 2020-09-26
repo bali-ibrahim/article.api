@@ -16,8 +16,15 @@ namespace API.Controllers
             _service = service;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAsync()
+        {
+            var rows = await _service.GetAsync();
+            return Ok(rows);
+        }
+
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync(int? id)
+        public async Task<IActionResult> GetAsync(int id)
         {
             var rows = await _service.GetAsync(id);
             return Ok(rows);

@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Model;
+using Model.Interface;
 
 namespace Service
 {
