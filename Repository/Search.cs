@@ -12,7 +12,7 @@ namespace Repository
         public const string VariableName = "var_pattern";
         private static readonly string PatternVariableSqlName = $"@{VariableName}";
 
-        private readonly string _charFriendlyPatternaVariableName =
+        private readonly string _charFriendlyPatternVariableName =
             $"CONCAT(UPPER(REPLACE({PatternVariableSqlName}, 'i', 'İ')), ' ', LOWER(REPLACE({PatternVariableSqlName}, 'I', 'ı')))";
 
         private static readonly List<string> Aliases = new List<string> {"m", "t", "a"};
@@ -113,7 +113,7 @@ INSERT INTO {tmpTableNameReopened} SELECT * FROM {TmpTableName};
 ";
             var statement = $@"
 {updateReopenedAndInsert}
-    AND MATCH({preparedMatchColumns}) AGAINST({_charFriendlyPatternaVariableName})
+    AND MATCH({preparedMatchColumns}) AGAINST({_charFriendlyPatternVariableName})
 ;
 
 -- if not full word
