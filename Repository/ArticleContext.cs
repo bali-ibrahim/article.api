@@ -7,6 +7,7 @@ namespace Repository
     {
         public ArticleContext(DbContextOptions<ArticleContext> options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public DbSet<Meta> Meta { get; set; }
@@ -32,7 +33,7 @@ namespace Repository
 
             modelBuilder.Entity<Context>(entity =>
             {
-                entity.HasKey(e => e.Id);
+                entity.HasKey(e => e.MetaId);
                 entity.Property(e => e.Body).IsRequired();
             });
         }

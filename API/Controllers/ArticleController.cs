@@ -11,13 +11,13 @@ namespace API.Controllers
     public class ArticleController : ControllerBase
     {
         private readonly ICollectionRepository<IMeta> _metaRepository;
-        private readonly ISingleRepository<Article> _articleRepository;
+        private readonly ISingleRepository<Article> _articleUnitOfWork;
 
         public ArticleController(ICollectionRepository<IMeta> metaRepository,
-            ISingleRepository<Article> articleRepository)
+            ISingleRepository<Article> articleUnitOfWork)
         {
             _metaRepository = metaRepository;
-            _articleRepository = articleRepository;
+            _articleUnitOfWork = articleUnitOfWork;
         }
 
         [HttpGet]
@@ -28,11 +28,10 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> GetAsync(long id)
         {
-            //var rows = await _articleRepository.ReadAsync(id);
-            var rows = await _metaRepository.SearchAsync("ağ");
-            return Ok(rows);
+            var row = await _articleUnitOfWork.ReadAsync(id);
+            return Ok(row);
         }
 
         [HttpPost("search")]
@@ -45,21 +44,21 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAsync(Article model)
         {
-            var isSuccessful = await _articleRepository.CreateAsync(model);
+            var isSuccessful = await _articleUnitOfWork.CreateAsync(model);
             return Ok(isSuccessful);
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateAsync(Article model)
         {
-            var isSuccessful = await _articleRepository.UpdateAsync(model);
+            var isSuccessful = await _articleUnitOfWork.UpdateAsync(model);
             return Ok(isSuccessful);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
+        public async Task<IActionResult> DeleteAsync(long id)
         {
-            var isSuccessful = await _articleRepository.DeleteAsync(id);
+            var isSuccessful = await _articleUnitOfWork.DeleteAsync(id);
             return Ok(isSuccessful);
         }
     }

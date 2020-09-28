@@ -22,8 +22,8 @@ namespace API
 
         private void ConfigureIoC(IServiceCollection services)
         {
-            services.AddDbContext<ArticleContext>(o => o.UseMySQL(Configuration.GetConnectionString("maria")));
-            services.AddTransient<IArticle, Article>();
+            services.AddDbContext<ArticleContext>(o =>
+                o.UseMySQL(Configuration.GetConnectionString("maria")).EnableSensitiveDataLogging());
             services.AddTransient<ICollectionRepository<IMeta>, MetaRepository>();
             services.AddTransient<ISingleRepository<Article>, ArticleUnitOfWork>();
         }

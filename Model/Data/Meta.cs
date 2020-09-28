@@ -5,7 +5,7 @@ namespace Model.Data
 {
     public class Meta : IMeta
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Title { get; set; }
         public string AuthorFullName { get; set; }
         public DateTime LastEditedTimestamp { get; set; }

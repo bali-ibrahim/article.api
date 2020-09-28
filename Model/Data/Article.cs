@@ -5,7 +5,7 @@ namespace Model.Data
 {
     public class Article : IArticle
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         public string Title { get; set; }
 
@@ -13,6 +13,7 @@ namespace Model.Data
         public string AuthorFullName { get; set; }
 
         public string Body { get; set; }
+        public long MetaId { get; set; }
         public Meta Meta { get; set; }
 
         // TODO: add version control instead maybe as future work

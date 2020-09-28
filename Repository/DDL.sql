@@ -1,8 +1,9 @@
-﻿CREATE SCHEMA article CHAR SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+﻿DROP SCHEMA IF EXISTS article;
+CREATE SCHEMA article CHAR SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE article;
 DROP TABLE IF EXISTS Meta;
 CREATE TABLE `Meta` (
-  `Id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `Id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   `Title` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `AuthorFullName` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `LastEditedTimestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -15,37 +16,20 @@ CREATE TABLE `Meta` (
 )
 ;
 
-DROP TABLE IF EXISTS context;
-CREATE TABLE `context` (
-  `Id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `MetaId` bigint(20) unsigned NOT NULL,
+DROP TABLE IF EXISTS Context;
+CREATE TABLE `Context` (
+  `MetaId` INTEGER UNSIGNED NOT NULL,
   `Body` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `_DB_META_CREATEDTIMESTAMP` timestamp NOT NULL DEFAULT current_timestamp(),
   `_DB_META_MODIFIEDTIMESTAMP` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`Id`),
-  KEY `context_meta_Id_fk` (`MetaId`),
+  PRIMARY KEY (`MetaId`),
+  KEY `Context_Meta_Id_fk` (`MetaId`),
   FULLTEXT KEY `FTK_Body` (`Body`),
-  CONSTRAINT `context_meta_Id_fk` FOREIGN KEY (`MetaId`) REFERENCES `Meta` (`Id`)
+  CONSTRAINT `Context_Meta_Id_fk` FOREIGN KEY (`MetaId`) REFERENCES `Meta` (`Id`)
 )
 ;
 
-#
-# INSERT INTO Meta (Title, AuthorFullName, LastEditedTimestamp)
-# VALUES ('çöküş ağı', 'İ. Bali', CURRENT_TIMESTAMP)
-# ;
-#
-#
-# SET @var_str := 'bali';
-# # EXPLAIN
-# SELECT *
-# FROM Meta m
-# WHERE MATCH(Title, AuthorFullName) AGAINST(@var_ag)
-# ;
-#
-# CALL sp_search_meta(@var_str);
-
-# SHOW CREATE TABLE context;
-
-
+DROP USER IF EXISTS 'api'@'%';
 CREATE USER 'api'@'%' IDENTIFIED BY '*#zEfcB6wJn3pQPKpoBT3qBsd%aDZo8E';
 GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE, CREATE TEMPORARY TABLES ON article.* TO 'api'@'%';
+# GRANT ALL ON *.* TO 'api'@'%';

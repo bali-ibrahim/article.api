@@ -5,9 +5,9 @@ namespace Model.Interface
 {
     public interface ISingleRepository<T> where T : IEntity
     {
-        Task<T> ReadAsync(int id);
+        Task<T> ReadAsync(long id);
         Task<T> CreateAsync(T model);
         Task<bool> UpdateAsync(T model);
-        Task<bool> DeleteAsync(int id);
+        Task<bool> DeleteAsync(long id);
     }
 }
