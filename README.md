@@ -53,7 +53,7 @@ In this project the injection is done in Startup.cs. Which allows the configurat
 
 ### Development
 
-The ideas here aims to improve the application consistency and code integrity & maintainability
+The ideas here aim to improve the application consistency and code integrity & maintainability
 
 - [ ] Adopt a more code-first approach to lower the amount designed manually, e.g schema creation
 - [ ] Automate build process, at least have a script to generate the environment the app runs in
@@ -72,5 +72,5 @@ The ideas here aims to improve the application consistency and code integrity & 
 - .Net Core Framework (1 year experience)
 - C# (2 years experience mainly in api & service applications)
 - EntityFramework (MySQL wrapper)  (*No prior* experience, 1 year experience with [Dapper](https://github.com/StackExchange/Dapper))
-- MariaDB ( 2.5 years experience mainly on MySQL 5.7)
+- MariaDB (2.5 years experience mainly on MySQL 5.7)
 - Git/Github (2.5 years experience)
