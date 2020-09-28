@@ -1,11 +1,14 @@
 ﻿using System;
+using Model.Data.Interface;
 
-namespace Model.Interface
+namespace Model.Data
 {
-    public interface IMeta : IEntity
+    public class Meta : IMeta
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string AuthorFullName { get; set; }
         public DateTime LastEditedTimestamp { get; set; }
+        public Context Context { get; set; }
     }
 }

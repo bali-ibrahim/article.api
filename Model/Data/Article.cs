@@ -1,11 +1,11 @@
 ﻿using System;
-using Model.Interface;
+using Model.Data.Interface;
 
-namespace Model
+namespace Model.Data
 {
     public class Article : IArticle
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public string Title { get; set; }
 
@@ -13,9 +13,11 @@ namespace Model
         public string AuthorFullName { get; set; }
 
         public string Body { get; set; }
+        public Meta Meta { get; set; }
 
         // TODO: add version control instead maybe as future work
         public DateTime LastEditedTimestamp { get; set; }
-        // TODO: add relational tag logic
+
+        public Context Context { get; set; }
     }
 }
