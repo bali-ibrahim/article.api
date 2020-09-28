@@ -9,10 +9,11 @@ namespace Repository
     internal class Search
     {
         private const string TmpTableName = "tmp_match";
-        private const string PatternVariableName = "@var_pattern";
+        public const string VariableName = "var_pattern";
+        private static readonly string PatternVariableSqlName = $"@{VariableName}";
 
         private readonly string _charFriendlyPatternaVariableName =
-            $"CONCAT(UPPER(REPLACE({PatternVariableName}, 'i', 'İ')), ' ', LOWER(REPLACE({PatternVariableName}, 'I', 'ı')))";
+            $"CONCAT(UPPER(REPLACE({PatternVariableSqlName}, 'i', 'İ')), ' ', LOWER(REPLACE({PatternVariableSqlName}, 'I', 'ı')))";
 
         private static readonly List<string> Aliases = new List<string> {"m", "t", "a"};
         private readonly ArticleContext _context;
@@ -119,7 +120,7 @@ INSERT INTO {tmpTableNameReopened} SELECT * FROM {TmpTableName};
 ";
             statement = stringColumns.Aggregate(statement, (current, stringColumn) => current + $@"
 {updateReopenedAndInsert}
-    AND {Aliases[0]}.{stringColumn} REGEXP {PatternVariableName}
+    AND {Aliases[0]}.{stringColumn} REGEXP {PatternVariableSqlName}
 ;
 ");
             return statement;

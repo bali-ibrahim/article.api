@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Model.Data;
 using Model.Data.Interface;
 using Model.Interface;
 using MySql.Data.MySqlClient;
@@ -31,7 +29,7 @@ namespace Repository
 
             await using var transaction = await _context.Database.BeginTransactionAsync();
 
-            var parameter = new MySqlParameter("var_pattern", pattern);
+            var parameter = new MySqlParameter(Search.VariableName, pattern);
             var rows = _context.Meta.FromSqlRaw(searchSql, parameter);
 
             return rows;
