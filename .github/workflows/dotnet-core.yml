@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies
-      run: dotnet restore  API\API.sln
+      run: dotnet restore API/API.sln
     - name: Build
-      run: dotnet build --configuration Release --no-restore API\API.sln
+      run: dotnet build --configuration Release --no-restore API/API.sln
     - name: Test
-      run: dotnet test --no-restore --verbosity normal API\API.sln
+      run: dotnet test --no-restore --verbosity normal API/API.sln
